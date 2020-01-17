@@ -2,9 +2,9 @@
 
 
 
-LinkedList<Tickets> getTicketsByPassenger(std::string firstName, std::string lastName, std::string password, MYSQL* conn) {
+/*LinkedList<Tickets> getTicketsByPassenger(std::string firstName, std::string lastName, std::string password, MYSQL* conn) {
 
-}
+}*/
 
 LinkedList<City> getCitysToList(MYSQL* conn) {
 	MYSQL_ROW row;

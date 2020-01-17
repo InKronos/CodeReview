@@ -83,5 +83,5 @@ void dijkstra(int ** graph, int src, int lenght)
 
 	// print the constructed 
 	// distance array 
-	printSolution(dist, lenght, parent, );
+	printSolution(dist, lenght, parent);
 }

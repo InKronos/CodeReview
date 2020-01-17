@@ -1,16 +1,1 @@
-﻿  City.cpp
-C:\Users\i15pi\source\repos\ProjectFlyRez\ProjectFlyRez\queries.h(8,12): error C2065: "City": niezadeklarowany identyfikator
-  Flight.cpp
-  functions.cpp
-  Interface.cpp
-  Passenger.cpp
-  ProjectFlyRez.cpp
-C:\Users\i15pi\source\repos\ProjectFlyRez\ProjectFlyRez\queries.h(8,1): error C2923: "LinkedList": "City" nie jest prawidłowy argument typu szablon dla parametru "T"
-C:\Users\i15pi\source\repos\ProjectFlyRez\ProjectFlyRez\ProjectFlyRez.cpp(11,13): warning C4101: "res": lokalna zmienna, do której nie istnieje odwołanie
-  queries.cpp
-C:\Users\i15pi\source\repos\ProjectFlyRez\ProjectFlyRez\ProjectFlyRez.cpp(10,12): warning C4101: "row": lokalna zmienna, do której nie istnieje odwołanie
-C:\Users\i15pi\source\repos\ProjectFlyRez\ProjectFlyRez\queries.cpp(22,23): warning C4311: "<function-style-cast>": obcięcie wskaźnika z "char *" do "int"
-  structs.cpp
-  TableBase.cpp
-  Tickets.cpp
-C:\Users\i15pi\source\repos\ProjectFlyRez\ProjectFlyRez\queries.cpp(22,23): warning C4302: "<function-style-cast>": obcięcie z "char *" do "int"
+﻿  ProjectFlyRez.vcxproj -> C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez\x64\Release\ProjectFlyRez.exe
