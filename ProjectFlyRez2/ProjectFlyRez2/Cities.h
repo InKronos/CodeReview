@@ -1,13 +1,13 @@
 #pragma once
 #include "stdafx.h"
 
-class T
+class Tmp
 {
 public:
 	virtual void print() {};
 };
 
-class City : T
+class City : Tmp
 {
 	std::string name;
 	int number;
@@ -15,6 +15,27 @@ public:
 	City(string _name, int _number);
 	void print();
 };
+
+
+class Flight : Tmp
+{
+	int leftnode;
+	int rightnode;
+	int distance;
+public:
+	Flight(int _leftnode, int _rightnode, int _distance);
+	int getLeftNode() {
+		return this->leftnode;
+	}
+	int getRightNode() {
+		return this->rightnode;
+	}
+	int getDistance() {
+		return this->distance;
+	}
+
+};
+
 
 template <class T>
 class List {
@@ -47,6 +68,13 @@ public:
 			this->curr = this->curr->next;
 		}
 		this->count++;
+	}
+	node* getNodeHeader() {
+		return this->head;
+	}
+
+	int getSize() {
+		return this->count;
 	}
 	//void deleteNode(T& delData);
 	void PrintList() {

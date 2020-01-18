@@ -153,11 +153,15 @@
   <ItemGroup>
     <ClCompile Include="Cities.cpp" />
     <ClCompile Include="functions.cpp" />
+    <ClCompile Include="graph.cpp" />
+    <ClCompile Include="MyException.cpp" />
     <ClCompile Include="ProjectFlyRez2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cities.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="graph.h" />
+    <ClInclude Include="MyException.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
