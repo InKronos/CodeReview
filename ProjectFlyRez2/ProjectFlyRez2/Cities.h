@@ -3,27 +3,34 @@
 
 class Tmp
 {
+protected:
+	int id;
 public:
 	virtual void print() {};
+	int getId() {
+		return this->id;
+	}
 };
 
-class City : Tmp
+class City : public Tmp
 {
 	std::string name;
-	int number;
 public:
-	City(string _name, int _number);
+	City(string _name, int _id);
+	std::string getName() {
+		return this->name;
+	}
 	void print();
 };
 
 
-class Flight : Tmp
+class Flight : public Tmp
 {
 	int leftnode;
 	int rightnode;
 	int distance;
 public:
-	Flight(int _leftnode, int _rightnode, int _distance);
+	Flight(int _id, int _leftnode, int _rightnode, int _distance);
 	int getLeftNode() {
 		return this->leftnode;
 	}

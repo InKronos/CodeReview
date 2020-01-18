@@ -3,9 +3,9 @@
 
 int minDistance(int dist[], bool sptSet[], int size);
 
-void printPath(int parent[], int j);
+vector<int> printPath(int parent[], int j);
 
 void printSolution(int dist[], int n, int parent[]);
 
-void dijkstra(int** graph, int src, int size);
+int* dijkstra(int** graph, int src, int size);
 

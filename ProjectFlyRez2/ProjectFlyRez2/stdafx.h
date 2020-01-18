@@ -5,6 +5,9 @@
 #include <string>
 #include <limits.h>
 #include <exception>
+#include <Windows.h>
+#include <algorithm>
+#include <vector> 
 
 using namespace std;
 

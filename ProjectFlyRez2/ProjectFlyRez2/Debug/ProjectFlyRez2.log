@@ -1,2 +1,11 @@
-﻿  graph.cpp
+﻿  Cities.cpp
+  MyException.cpp
+  ProjectFlyRez2.cpp
+  functions.cpp
+C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(35,80): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(46,92): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(62,20): warning C4018: '<': signed/unsigned mismatch
+  graph.cpp
+  Generating Code...
+C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(132,15): warning C4129: ' ': unrecognized character escape sequence
   ProjectFlyRez2.vcxproj -> C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\Debug\ProjectFlyRez2.exe
