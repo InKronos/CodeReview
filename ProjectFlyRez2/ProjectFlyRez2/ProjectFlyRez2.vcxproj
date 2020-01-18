@@ -163,6 +163,7 @@
     <ClInclude Include="graph.h" />
     <ClInclude Include="MyException.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Tmp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

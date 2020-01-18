@@ -12,6 +12,7 @@
 using namespace std;
 
 #include "MyException.h"
+#include "Tmp.h"
 #include "Cities.h"
 #include "functions.h"
 #include "graph.h"

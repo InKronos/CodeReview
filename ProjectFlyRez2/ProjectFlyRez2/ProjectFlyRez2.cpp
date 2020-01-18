@@ -4,6 +4,8 @@ int main()
 {
 	List<City> ListofCities = getCitiesFromFile();
 	List<Flight> ListofFlights = getFlightsFromFile();
+	List<Person> ListofPerson = getPersonsFromFile();
+	List<Ticket> ListofTickets = getTickietsFromFile();
 	int** graph = createGraph(ListofFlights, ListofCities.getSize());
 	std::string info = "";
 	while (1)
@@ -16,7 +18,7 @@ int main()
 		}
 		switch (choice) {
 		case 1:
-			bookFlight(ListofCities, ListofFlights, graph);
+			bookFlight(ListofCities, ListofFlights, ListofPerson, ListofTickets, graph);
 			break;
 		case 2:
 			break;

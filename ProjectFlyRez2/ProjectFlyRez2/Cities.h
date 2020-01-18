@@ -1,16 +1,6 @@
 #pragma once
 #include "stdafx.h"
 
-class Tmp
-{
-protected:
-	int id;
-public:
-	virtual void print() {};
-	int getId() {
-		return this->id;
-	}
-};
 
 class City : public Tmp
 {
@@ -41,6 +31,35 @@ public:
 		return this->distance;
 	}
 
+};
+
+
+class Person :
+	public Tmp
+{
+	std::string name, password;
+public:
+	Person(int _id, std::string _name, std::string _password);
+	std::string getName() {
+		return this->name;
+	}
+	std::string getPassword() {
+		return this->password;
+	}
+};
+
+class Ticket :
+	public Tmp
+{
+	int id_person, id_flight;
+public:
+	Ticket(int _id, int _id_person, int _id_flight);
+	int getIdPerson() {
+		return this->id_person;
+	}
+	int getIdFlight() {
+		return this->id_flight;
+	}
 };
 
 
@@ -78,6 +97,10 @@ public:
 	}
 	node* getNodeHeader() {
 		return this->head;
+	}
+
+	node* getNodeCurr() {
+		return this->curr;
 	}
 
 	int getSize() {

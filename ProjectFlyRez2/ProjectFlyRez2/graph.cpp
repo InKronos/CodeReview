@@ -39,39 +39,25 @@ int minDistance(int dist[], bool sptSet[], int size)
 	return min_index;
 }
 
-vector<int> printPath(int parent[], int j)
+vector<int> printPath(int parent[], int j, int source)
 {
 
 	// Base Case : If j is source 
 	vector<int> arrayOfNodes;
 	int k = j;
 	int count = 0;
-	while (parent[k] != -1) {
-		std::cout << k << endl;
+	do{
 		arrayOfNodes.push_back(k);
 		k = parent[k];
 		count++;
-	}
+	} while (k != source);
 	arrayOfNodes.push_back(0);
 	std::reverse(arrayOfNodes.begin(), arrayOfNodes.end());
-	
 
-	
 	return arrayOfNodes;
-	//printf("%d ", j);
 }
 
 
-void printSolution(int dist[], int n, int parent[])
-{
-	int src = 0;
-	printf("Vertex\t Distance\tPath");
-	for (int i = 1; i < n; i++)
-	{
-		printf("\n%d -> %d \t\t %d\t\t%d ",src, i, dist[i], src);
-		printPath(parent, i);
-	}
-}
 
 int* dijkstra(int **graph, int src, int size)
 {

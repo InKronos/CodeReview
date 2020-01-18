@@ -19,18 +19,49 @@ List<City> getCitiesFromFile() {
 }
 
 List<Flight> getFlightsFromFile() {
-	fstream citiesFile;
-	citiesFile.open("Flights.txt");
+	fstream fightsFile;
+	fightsFile.open("Flights.txt");
 	List<Flight> ListOfFlights;
-	if (citiesFile) {
+	if (fightsFile) {
 		int id, leftnode, rightnode, distance;
-		while (citiesFile >> id >> leftnode >> rightnode >> distance) {
+		while (fightsFile >> id >> leftnode >> rightnode >> distance) {
 			Flight flight(id, leftnode, rightnode, distance);
 			ListOfFlights.AddNode(flight);
 		}
 	}
 	return ListOfFlights;
 }
+
+
+List<Person> getPersonsFromFile() {
+	fstream personsFile;
+	personsFile.open("Persons.txt");
+	List<Person> ListOfPersons;
+	if (personsFile) {
+		int id;
+		std::string name, password;
+		while (personsFile >> id >> name >> password) {
+			Person person(id, name, password);
+			ListOfPersons.AddNode(person);
+		}
+	}
+	return ListOfPersons;
+}
+
+List<Ticket> getTickietsFromFile() {
+	fstream ticketsFile;
+	ticketsFile.open("Tickiets.txt");
+	List<Ticket> ListOfTickiets;
+	if (ticketsFile) {
+		int id, id_person, id_flight;
+		while (ticketsFile >> id >> id_person >> id_flight) {
+			Ticket tickiet(id, id_person, id_flight);
+			ListOfTickiets.AddNode(tickiet);
+		}
+	}
+	return ListOfTickiets;
+}
+
 
 int getIdByName(List<City> &ListofCities, std::string &name) throw (MyException){
 	auto head = ListofCities.getNodeHeader();
@@ -72,6 +103,8 @@ List<Flight> getFlights(vector<int> &path, List<Flight> &ListOfFlight) {
 	return ListOfFlightsbyPath;
 }
 
+
+
 std::string getNameById(List<City> &ListOfCities, int id) {
 	std::string name = "";
 	auto head = ListOfCities.getNodeHeader();
@@ -90,12 +123,41 @@ void PrintFlights(List<City> &ListOfCities, List<Flight> &ListOfFlight) {
 	auto head = ListOfFlight.getNodeHeader();
 	while (head != nullptr) {
 		Flight flight = head->data;
-		std::cout << getNameById(ListOfCities, flight.getLeftNode()) << " " << getNameById(ListOfCities, flight.getRightNode()) << " " << flight.getDistance();
+		std::cout << getNameById(ListOfCities, flight.getLeftNode()) << "\t" << getNameById(ListOfCities, flight.getRightNode()) << "\t" << flight.getDistance() << " km" << std::endl;
 		head = head->next;
 	}
 }
 
-void bookFlight(List<City> ListOfCities, List<Flight> ListOfFlight, int** graph) {
+Person getPerson(List<Person>& ListOfPersons, std::string name, std::string password) {
+	auto head = ListOfPersons.getNodeHeader();
+	int lastid = 1;
+	while (head != nullptr) {
+		Person person = head->data;
+		if (person.getName() == name && password == person.getName()) {
+			return person;
+		}
+		lastid = person.getId();
+		head = head->next;
+	}
+	return Person(lastid+1, name, password);
+}
+
+void saveTickiet(List<Ticket> ListOfTickiets, Person person, List<Flight> ListOfFlights) {
+	auto headFlights = ListOfFlights.getNodeHeader();
+	auto TicketCurr = ListOfTickiets.getNodeCurr();
+	int id;
+	if (TicketCurr == nullptr) 
+		id = 1;
+	else
+		id = TicketCurr->data.getId();
+	while (headFlights != nullptr)
+	{
+		ListOfTickiets.AddNode(Ticket(id, person.getId(), headFlights->data.getId()));
+		headFlights = headFlights->next;
+	}
+}
+
+void bookFlight(List<City> &ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets, int** graph) {
 	try {
 		int source, destination;
 		std::string sourceStr, destinationStr;
@@ -105,15 +167,31 @@ void bookFlight(List<City> ListOfCities, List<Flight> ListOfFlight, int** graph)
 		source = getIdByName(ListOfCities, sourceStr);
 		std::cout << "\nType destination: ";
 		std::cin >> destinationStr;
+
+
 		destination = getIdByName(ListOfCities, destinationStr);
 		int * dijkstraArr = dijkstra(graph, source-1, ListOfCities.getSize());
-		vector<int> path = printPath(dijkstraArr, destination - 1);
-
+		vector<int> path = printPath(dijkstraArr, destination - 1, source-1);
 		path[0] = source - 1;
 		List<Flight> FligthsByPath = getFlights(path, ListOfFlight);
+
+
+		std::cout << "We find " << path.size() - 1 << " flight" << std::endl;
+		std::cout << "Source \t Destiantion \t Distance" << std::endl;
 		PrintFlights(ListOfCities, FligthsByPath);
-		int a;
-		std::cin >> a;
+		std::cout << "Do you want book it?(y/n) ";
+		std::string answer;
+		std::cin >> answer;
+		if (answer == "y") {
+			std::string name, password;
+			std::cout << "What your username: ";
+			std::cin >> name;
+			std:cout << "Whats your password: ";
+			std::cin >> password;
+			auto person = getPerson(ListOfPersons, name, password);
+			saveTickiet(ListOfTickiets, person, FligthsByPath);
+		}
+		
 
 	}
 	catch (MyException & e) {
