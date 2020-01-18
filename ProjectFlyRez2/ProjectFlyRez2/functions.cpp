@@ -3,7 +3,6 @@
 
 
 
-
 List<City> getCitiesFromFile() {
 	fstream citiesFile;
 	citiesFile.open("Cities.txt");

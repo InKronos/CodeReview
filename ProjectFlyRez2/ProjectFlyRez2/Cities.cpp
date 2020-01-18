@@ -7,15 +7,17 @@ City::City(string _name, int _number) {
 }
 
 void City::print() {
-	std::cout << this->number << ". " << this->name;
+	std::cout << this->number << ". " << this->name << std::endl;
 }
-
+/*
+template <class T>
 List<class T>::List() {
 	this->head = nullptr;
 	this->curr = this->head;
 	this->count = 0;
 }
 
+template <class T>
 void List<class T>::AddNode(const T & addData) {
 	if (this->head == nullptr) {
 		this->head = new node(addData);
@@ -28,6 +30,7 @@ void List<class T>::AddNode(const T & addData) {
 	this->count++;
 }
 
+template <class T>
 void List<class T>::PrintList() {
 	node* tmp = this->head;
 	while (tmp != nullptr)
@@ -35,5 +38,5 @@ void List<class T>::PrintList() {
 		tmp->data.print();
 	}
 }
-
+*/
 

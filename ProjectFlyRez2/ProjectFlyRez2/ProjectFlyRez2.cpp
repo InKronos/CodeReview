@@ -2,7 +2,9 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    
+	List<City> ListofCities = getCitiesFromFile();
+	printCities(ListofCities);
 
 }
 

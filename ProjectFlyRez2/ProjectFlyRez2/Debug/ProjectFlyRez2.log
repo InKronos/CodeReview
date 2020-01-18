@@ -1,8 +1,5 @@
 ﻿  Cities.cpp
   ProjectFlyRez2.cpp
   functions.cpp
-  Generowanie kodu...
-functions.obj : error LNK2019: nierozpoznany zewnętrzny symbol "public: __thiscall List<class City>::List<class City>(void)" (??0?$List@VCity@@@@QAE@XZ) przywołany w funkcji "class List<class City> __cdecl getCitiesFromFile(void)" (?getCitiesFromFile@@YA?AV?$List@VCity@@@@XZ)
-functions.obj : error LNK2019: nierozpoznany zewnętrzny symbol "public: void __thiscall List<class City>::AddNode(class City const &)" (?AddNode@?$List@VCity@@@@QAEXABVCity@@@Z) przywołany w funkcji "class List<class City> __cdecl getCitiesFromFile(void)" (?getCitiesFromFile@@YA?AV?$List@VCity@@@@XZ)
-functions.obj : error LNK2019: nierozpoznany zewnętrzny symbol "public: void __thiscall List<class City>::PrintList(void)" (?PrintList@?$List@VCity@@@@QAEXXZ) przywołany w funkcji "void __cdecl printCities(class List<class City>)" (?printCities@@YAXV?$List@VCity@@@@@Z)
-C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\Debug\ProjectFlyRez2.exe : fatal error LNK1120: liczba nierozpoznanych elementów zewnętrznych: 3
+  Generating Code...
+  ProjectFlyRez2.vcxproj -> C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\Debug\ProjectFlyRez2.exe

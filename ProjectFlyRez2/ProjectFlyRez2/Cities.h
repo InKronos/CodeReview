@@ -32,9 +32,31 @@ private:
 
 public:
 	
-	List();
-	void AddNode(const T& addData);
-	void deleteNode(T& delData);
-	void PrintList();
+	List() {
+		this->head = nullptr;
+		this->curr = this->head;
+		this->count = 0;
+	}
+	void AddNode(const T& addData) {
+		if (this->head == nullptr) {
+			this->head = new node(addData);
+			this->curr = this->head;
+		}
+		else {
+			this->curr->next = new node(addData);
+			this->curr = this->curr->next;
+		}
+		this->count++;
+	}
+	//void deleteNode(T& delData);
+	void PrintList() {
+		node* tmp = this->head;
+		while (tmp != nullptr)
+		{
+			tmp->data.print();
+			tmp = tmp->next;
+		}
+		std::cout << this->count;
+	}
 };
 
