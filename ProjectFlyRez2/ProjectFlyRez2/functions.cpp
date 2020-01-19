@@ -128,25 +128,67 @@ void PrintFlights(List<City> &ListOfCities, List<Flight> &ListOfFlight) {
 	}
 }
 
-Person getPerson(List<Person>& ListOfPersons, std::string name, std::string password) {
+void SynchroPersons(List<Person>& ListOfPersons) {
+	std::fstream PersonFile;
+	PersonFile.open("Persons.txt", std::ios::out | std::ios::app);
+	auto currentPerson = ListOfPersons.getNodeCurr();
+	if (PersonFile) {
+		PersonFile << currentPerson->data.getId() << " " << currentPerson->data.getName() << " "<< currentPerson->data.getPassword() << std::endl;
+	}
+}
+
+void SynchroTickiet(List<Ticket>& ListOfTickiets) {
+	std::fstream TickietsFile;
+	TickietsFile.open("Tickiets.txt");
+	auto pTickiet = ListOfTickiets.getNodeHeader();
+	if (TickietsFile) {
+		while (pTickiet != nullptr)
+		{
+			TickietsFile << pTickiet->data.getId() << " " << pTickiet->data.getIdPerson() << " " << pTickiet->data.getIdFlight() << std::endl;
+			pTickiet = pTickiet->next;
+		}
+			
+	}
+}
+
+
+
+Person getPerson(List<Person>& ListOfPersons, std::string name, std::string password, std::string function) throw (MyException) {
 	auto head = ListOfPersons.getNodeHeader();
-	int lastid = 1;
+	int lastid = 0;
 	while (head != nullptr) {
 		Person person = head->data;
-		if (person.getName() == name && password == person.getName()) {
+		if (person.getName() == name  && person.getPassword() == password) {
 			return person;
 		}
 		lastid = person.getId();
 		head = head->next;
 	}
-	return Person(lastid+1, name, password);
+	if (function == "print") {
+		throw MyException("Error person not found", "getPerson", "Person is not in list");
+	}
+	else {
+		std::string answer;
+		std::cout << "No such person in database add it (y/n): ";
+		std::cin >> answer;
+		if (answer == "y") {
+			Person newperson(lastid + 1, name, password);
+			ListOfPersons.AddNode(newperson);
+			SynchroPersons(ListOfPersons);
+			return newperson;
+		}
+		else {
+			throw MyException("Error person not found", "getPerson", "Person is not in list");
+		}
+	}
+	
 }
 
 void saveTickiet(List<Ticket> ListOfTickiets, Person person, List<Flight> ListOfFlights) {
 	auto headFlights = ListOfFlights.getNodeHeader();
 	auto TicketCurr = ListOfTickiets.getNodeCurr();
 	int id;
-	if (TicketCurr == nullptr) 
+	if (TicketCurr == nullptr)
 		id = 1;
 	else
 		id = TicketCurr->data.getId();
@@ -155,7 +197,49 @@ void saveTickiet(List<Ticket> ListOfTickiets, Person person, List<Flight> ListOf
 		ListOfTickiets.AddNode(Ticket(id, person.getId(), headFlights->data.getId()));
 		headFlights = headFlights->next;
 	}
+	SynchroTickiet(ListOfTickiets);
 }
+
+
+void showTickiets(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets) {
+	std::string name, password;
+	std::cout << std::endl << "Your name: ";
+	std::cin >> name;
+	std::cout << std::endl << "Your password: ";
+	std::cin >> password;
+	try {
+		auto person = getPerson(ListOfPersons, name, password, "print");
+		auto headTickiets = ListOfTickiets.getNodeHeader();
+		
+		while (headTickiets != nullptr)
+		{
+			auto headFlights = ListOfFlight.getNodeHeader();
+			if (headTickiets->data.getIdPerson() == person.getId())
+			{
+				while (headFlights != nullptr)
+				{
+					if (headTickiets->data.getIdFlight() == headFlights->data.getId()) {
+						Flight flight = headFlights->data;
+						std::cout << getNameById(ListOfCities, flight.getLeftNode()) << "\t" << getNameById(ListOfCities, flight.getRightNode()) << "\t" << flight.getDistance() << " km" << std::endl;
+					}
+					headFlights = headFlights->next;
+				}
+			}
+			headTickiets = headTickiets->next;
+		}
+		std::cout << "Type something: ";
+		std::string info;
+		std::cin >> info;
+
+		
+	}
+	catch (MyException & e) {
+		e.what();
+		e.get_info();
+	}
+}
+
+
 
 void bookFlight(List<City> &ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets, int** graph) {
 	try {
@@ -188,8 +272,15 @@ void bookFlight(List<City> &ListOfCities, List<Flight>& ListOfFlight, List<Perso
 			std::cin >> name;
 			std:cout << "Whats your password: ";
 			std::cin >> password;
-			auto person = getPerson(ListOfPersons, name, password);
-			saveTickiet(ListOfTickiets, person, FligthsByPath);
+			try {
+				auto person = getPerson(ListOfPersons, name, password, "new");
+				saveTickiet(ListOfTickiets, person, FligthsByPath);
+			}
+			catch (MyException & e) {
+				e.what();
+				e.get_info();
+			}
+			
 		}
 		
 

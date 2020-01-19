@@ -21,8 +21,10 @@ int main()
 			bookFlight(ListofCities, ListofFlights, ListofPerson, ListofTickets, graph);
 			break;
 		case 2:
+			
 			break;
 		case 3:
+			showTickiets(ListofCities, ListofFlights, ListofPerson, ListofTickets);
 			break;
 		default:
 			info = "\n \t\t\terror option doesn't exist \n";

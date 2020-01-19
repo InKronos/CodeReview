@@ -2,8 +2,7 @@
 C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(66,80): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(77,92): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(93,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(189,7): warning C4102: 'std': unreferenced label
-  ProjectFlyRez2.cpp
-  Generating Code...
-C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(210,15): warning C4129: ' ': unrecognized character escape sequence
+C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(156,127): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
+C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(273,7): warning C4102: 'std': unreferenced label
+C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\ProjectFlyRez2\functions.cpp(301,15): warning C4129: ' ': unrecognized character escape sequence
   ProjectFlyRez2.vcxproj -> C:\Users\i15pi\OneDrive\Dokumenty\git repos\CodeReview\ProjectFlyRez2\Debug\ProjectFlyRez2.exe
