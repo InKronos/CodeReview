@@ -106,7 +106,29 @@ public:
 	int getSize() {
 		return this->count;
 	}
-	//void deleteNode(T& delData);
+	void deleteNode(T& delData) {
+		node* tmp = this->head;
+		if (tmp->data.getId() == delData.getId()) {
+			this->head = tmp->next;
+			delete tmp;
+		}
+		else {
+			while (tmp->next != nullptr) {
+				if (tmp->next->data.getId() == delData.getId()) {
+					if (tmp->next->next != nullptr) {
+						node* nextToDel = tmp->next->next;
+						delete tmp->next;
+						tmp->next = nextToDel;
+					}
+					else {
+						delete tmp->next;
+						tmp->next = nullptr;
+					}
+					
+				}
+			}
+		}
+	}
 	void PrintList() {
 		node* tmp = this->head;
 		while (tmp != nullptr)

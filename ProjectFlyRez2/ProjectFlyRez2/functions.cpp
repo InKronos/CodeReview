@@ -15,6 +15,7 @@ List<City> getCitiesFromFile() {
 			ListofCities.AddNode(city);
 		}
 	}
+	citiesFile.close();
 	return ListofCities;
 }
 
@@ -29,6 +30,7 @@ List<Flight> getFlightsFromFile() {
 			ListOfFlights.AddNode(flight);
 		}
 	}
+	fightsFile.close();
 	return ListOfFlights;
 }
 
@@ -45,6 +47,7 @@ List<Person> getPersonsFromFile() {
 			ListOfPersons.AddNode(person);
 		}
 	}
+	personsFile.close();
 	return ListOfPersons;
 }
 
@@ -59,6 +62,7 @@ List<Ticket> getTickietsFromFile() {
 			ListOfTickiets.AddNode(tickiet);
 		}
 	}
+	ticketsFile.close();
 	return ListOfTickiets;
 }
 
@@ -95,8 +99,8 @@ List<Flight> getFlights(vector<int> &path, List<Flight> &ListOfFlight) {
 		}
 	}
 	catch (MyException & e) {
-		e.what();
-		e.get_info();
+		std::cout << e.what() << std::endl;
+		std::cout << e.get_info() << std::endl;
 	}
 	
 
@@ -135,6 +139,7 @@ void SynchroPersons(List<Person>& ListOfPersons) {
 	if (PersonFile) {
 		PersonFile << currentPerson->data.getId() << " " << currentPerson->data.getName() << " "<< currentPerson->data.getPassword() << std::endl;
 	}
+	PersonFile.close();
 }
 
 void SynchroTickiet(List<Ticket>& ListOfTickiets) {
@@ -147,8 +152,8 @@ void SynchroTickiet(List<Ticket>& ListOfTickiets) {
 			TickietsFile << pTickiet->data.getId() << " " << pTickiet->data.getIdPerson() << " " << pTickiet->data.getIdFlight() << std::endl;
 			pTickiet = pTickiet->next;
 		}
-			
 	}
+	TickietsFile.close();
 }
 
 
@@ -201,7 +206,8 @@ void saveTickiet(List<Ticket> ListOfTickiets, Person person, List<Flight> ListOf
 }
 
 
-void showTickiets(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets) {
+vector<int> showTickiets(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets) {
+	vector<int> ids;
 	std::string name, password;
 	std::cout << std::endl << "Your name: ";
 	std::cin >> name;
@@ -219,8 +225,9 @@ void showTickiets(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Per
 				while (headFlights != nullptr)
 				{
 					if (headTickiets->data.getIdFlight() == headFlights->data.getId()) {
+						ids.push_back(headTickiets->data.getId());
 						Flight flight = headFlights->data;
-						std::cout << getNameById(ListOfCities, flight.getLeftNode()) << "\t" << getNameById(ListOfCities, flight.getRightNode()) << "\t" << flight.getDistance() << " km" << std::endl;
+						std::cout << headTickiets->data.getId() << " " << getNameById(ListOfCities, flight.getLeftNode()) << "\t" << getNameById(ListOfCities, flight.getRightNode()) << "\t" << flight.getDistance() << " km" << std::endl;
 					}
 					headFlights = headFlights->next;
 				}
@@ -230,13 +237,41 @@ void showTickiets(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Per
 		std::cout << "Type something: ";
 		std::string info;
 		std::cin >> info;
-
+		return ids;
 		
 	}
 	catch (MyException & e) {
-		e.what();
-		e.get_info();
+		std::cout << e.what() << std::endl;
+		std::cout << e.get_info() << std::endl;
 	}
+}
+
+void deleteTickietById(int id, List<Ticket>& ListOfTickiets) {
+	auto head = ListOfTickiets.getNodeHeader();
+	while (head != nullptr) {
+		auto tmp = head->next;
+		if (head->data.getIdFlight() == id) {
+			ListOfTickiets.deleteNode(head->data);
+		}
+		head = tmp;
+	}
+	SynchroTickiet(ListOfTickiets);
+}
+
+void deleteTickiet(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets) {
+	vector<int> ids = showTickiets(ListOfCities, ListOfFlight, ListOfPersons, ListOfTickiets);
+	int whichToDel;
+	std::cout << "Które usun¹æ? wpisz id: ";
+	std::cin >> whichToDel;
+	for (int i = 0; i < ids.size(); i++) {
+		if (ids[i] == whichToDel) {
+			deleteTickietById(whichToDel, ListOfTickiets);
+			std::cout << std::endl << "Ok";
+			return;
+		}
+	}
+	std::cout << std::endl << "wrong id";
+	
 }
 
 
@@ -251,11 +286,13 @@ void bookFlight(List<City> &ListOfCities, List<Flight>& ListOfFlight, List<Perso
 		source = getIdByName(ListOfCities, sourceStr);
 		std::cout << "\nType destination: ";
 		std::cin >> destinationStr;
+		if (destinationStr == sourceStr) {
+			throw MyException("Error", "getFlight", "This such flight doesn't exist");
+		}
 
-
-		destination = getIdByName(ListOfCities, destinationStr);
+		int destinationId = getIdByName(ListOfCities, destinationStr);
 		int * dijkstraArr = dijkstra(graph, source-1, ListOfCities.getSize());
-		vector<int> path = printPath(dijkstraArr, destination - 1, source-1);
+		vector<int> path = printPath(dijkstraArr, destinationId - 1, source-1);
 		path[0] = source - 1;
 		List<Flight> FligthsByPath = getFlights(path, ListOfFlight);
 
@@ -277,8 +314,8 @@ void bookFlight(List<City> &ListOfCities, List<Flight>& ListOfFlight, List<Perso
 				saveTickiet(ListOfTickiets, person, FligthsByPath);
 			}
 			catch (MyException & e) {
-				e.what();
-				e.get_info();
+				std::cout << e.what() << std::endl;
+				std::cout << e.get_info() << std::endl;
 			}
 			
 		}
@@ -286,13 +323,13 @@ void bookFlight(List<City> &ListOfCities, List<Flight>& ListOfFlight, List<Perso
 
 	}
 	catch (MyException & e) {
-		e.what();
-		e.get_info();
+		std::cout << e.what() << std::endl;
+		std::cout << e.get_info() << std::endl;
 	}
 }
 
 void draw(std::string info) {
-	system("CLS");
+	//system("CLS");
 	std::cout << "\n\n \t\tWelcome To Flight Reservation System" << endl << endl;
 	std::cout << "\t   <><><><><><><><><><><><><><><><><><><><><><><>\n";
 	std::cout << "\t   Book your Flight tickets at affordable prices!" << endl;

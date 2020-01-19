@@ -8,6 +8,7 @@ int main()
 	List<Ticket> ListofTickets = getTickietsFromFile();
 	int** graph = createGraph(ListofFlights, ListofCities.getSize());
 	std::string info = "";
+	vector<int> id;
 	while (1)
 	{
 		draw(info);
@@ -21,10 +22,10 @@ int main()
 			bookFlight(ListofCities, ListofFlights, ListofPerson, ListofTickets, graph);
 			break;
 		case 2:
-			
+			deleteTickiet(ListofCities, ListofFlights, ListofPerson, ListofTickets);
 			break;
 		case 3:
-			showTickiets(ListofCities, ListofFlights, ListofPerson, ListofTickets);
+			id = showTickiets(ListofCities, ListofFlights, ListofPerson, ListofTickets);
 			break;
 		default:
 			info = "\n \t\t\terror option doesn't exist \n";

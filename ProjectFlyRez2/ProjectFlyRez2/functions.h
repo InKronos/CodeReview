@@ -17,7 +17,9 @@ List<Ticket> getTickietsFromFile();
 
 int** createGraph(List<Flight> list, int size);
 
-void showTickiets(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets);
+void deleteTickiet(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets);
+
+vector<int> showTickiets(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets);
 //int getIdByName(List<City>& ListofCities, std::string& name) throw (MyException);
 
 void saveTickiet(List<Ticket> ListOfTickiets, Person person, List<Flight> ListOfFlights);
