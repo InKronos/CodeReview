@@ -3,19 +3,17 @@
 
 List<City> getCitiesFromFile();
 
-void mainMenu();
-
-void draw(std::string info);
-
-void printCities(List<City> ListOfCities);
-
 List<Flight> getFlightsFromFile();
 
 List<Person> getPersonsFromFile();
 
 List<Ticket> getTickietsFromFile();
 
-int** createGraph(List<Flight> list, int size);
+void mainMenu();
+
+void draw(std::string info);
+
+void printCities(List<City> ListOfCities);
 
 void deleteTickiet(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Person>& ListOfPersons, List<Ticket>& ListOfTickiets);
 

@@ -4,6 +4,7 @@
 
 
 List<City> getCitiesFromFile() {
+	bool isGood = true;
 	fstream citiesFile;
 	citiesFile.open("Cities.txt");
 	List<City> ListofCities;
@@ -15,11 +16,18 @@ List<City> getCitiesFromFile() {
 			ListofCities.AddNode(city);
 		}
 	}
+	else
+		isGood = false;
+	if (ListofCities.getNodeHeader() == nullptr) 
+		isGood = false;
+	if (!isGood) 
+		throw exception("Error can get to file");
 	citiesFile.close();
 	return ListofCities;
 }
 
 List<Flight> getFlightsFromFile() {
+	bool isGood = true;
 	fstream fightsFile;
 	fightsFile.open("Flights.txt");
 	List<Flight> ListOfFlights;
@@ -30,12 +38,19 @@ List<Flight> getFlightsFromFile() {
 			ListOfFlights.AddNode(flight);
 		}
 	}
+	else
+		isGood = false;
+	if (ListOfFlights.getNodeHeader() == nullptr)
+		isGood = false;
+	if (!isGood)
+		throw exception("Error can get to file");
 	fightsFile.close();
 	return ListOfFlights;
 }
 
 
 List<Person> getPersonsFromFile() {
+	bool isGood = true;
 	fstream personsFile;
 	personsFile.open("Persons.txt");
 	List<Person> ListOfPersons;
@@ -47,11 +62,16 @@ List<Person> getPersonsFromFile() {
 			ListOfPersons.AddNode(person);
 		}
 	}
+	else
+		isGood = false;
+	if (!isGood)
+		throw exception("Error can get to file");
 	personsFile.close();
 	return ListOfPersons;
 }
 
 List<Ticket> getTickietsFromFile() {
+	bool isGood = true;
 	fstream ticketsFile;
 	ticketsFile.open("Tickiets.txt");
 	List<Ticket> ListOfTickiets;
@@ -62,6 +82,10 @@ List<Ticket> getTickietsFromFile() {
 			ListOfTickiets.AddNode(tickiet);
 		}
 	}
+	else
+		isGood = false;
+	if (!isGood)
+		throw exception("Error can get to file");
 	ticketsFile.close();
 	return ListOfTickiets;
 }
@@ -201,6 +225,7 @@ void saveTickiet(List<Ticket> ListOfTickiets, Person person, List<Flight> ListOf
 	{
 		ListOfTickiets.AddNode(Ticket(id, person.getId(), headFlights->data.getId()));
 		headFlights = headFlights->next;
+		id++;
 	}
 	SynchroTickiet(ListOfTickiets);
 }
@@ -263,13 +288,16 @@ void deleteTickiet(List<City>& ListOfCities, List<Flight>& ListOfFlight, List<Pe
 	int whichToDel;
 	std::cout << "Które usun¹æ? wpisz id: ";
 	std::cin >> whichToDel;
-	for (int i = 0; i < ids.size(); i++) {
-		if (ids[i] == whichToDel) {
-			deleteTickietById(whichToDel, ListOfTickiets);
-			std::cout << std::endl << "Ok";
-			return;
+	if (ids.size() == 0) {
+		for (int i = 0; i < ids.size(); i++) {
+			if (ids[i] == whichToDel) {
+				deleteTickietById(whichToDel, ListOfTickiets);
+				std::cout << std::endl << "Ok";
+				return;
+			}
 		}
 	}
+	
 	std::cout << std::endl << "wrong id";
 	
 }
@@ -298,7 +326,7 @@ void bookFlight(List<City> &ListOfCities, List<Flight>& ListOfFlight, List<Perso
 
 
 		std::cout << "We find " << path.size() - 1 << " flight" << std::endl;
-		std::cout << "Source \t Destiantion \t Distance" << std::endl;
+		std::cout << "\t\t \t\t Distance" << std::endl;
 		PrintFlights(ListOfCities, FligthsByPath);
 		std::cout << "Do you want book it?(y/n) ";
 		std::string answer;
