@@ -151,17 +151,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Cities.cpp" />
+    <ClCompile Include="ClassOfTmp.cpp" />
+    <ClCompile Include="fileOperation.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="graph.cpp" />
-    <ClCompile Include="MyException.cpp" />
+    <ClCompile Include="graphOperation.cpp" />
+    <ClCompile Include="listOperations.cpp" />
     <ClCompile Include="ProjectFlyRez2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cities.h" />
+    <ClInclude Include="ClassOfTmp.h" />
+    <ClInclude Include="fileOperation.h" />
     <ClInclude Include="functions.h" />
     <ClInclude Include="graph.h" />
-    <ClInclude Include="MyException.h" />
+    <ClInclude Include="graphOperation.h" />
+    <ClInclude Include="list.h" />
+    <ClInclude Include="listOperations.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Tmp.h" />
   </ItemGroup>

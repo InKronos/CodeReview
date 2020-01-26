@@ -7,31 +7,31 @@ int main()
 		List<Flight> ListofFlights = getFlightsFromFile();
 		List<Person> ListofPerson = getPersonsFromFile();
 		List<Ticket> ListofTickets = getTickietsFromFile();
-		int** graph = createGraph(ListofFlights, ListofCities.getSize());
+		Graph graph = createGraph(ListofFlights, ListofCities.getSize());
+		
 		std::string info = "";
 		vector<int> id;
 		while (1)
 		{
-			draw(info);
-			int choice;
-			std::cin >> choice;
-			if (choice == 4) {
-				break;
+			try {
+				draw(info);
+				int choice;
+				std::cin >> choice;
+				if (choice == 4)
+					break;
+				else if (choice == 1)
+					bookFlight(ListofCities, ListofFlights, ListofPerson, ListofTickets, graph);
+				else if (choice == 2)
+					deleteTickiet(ListofCities, ListofFlights, ListofPerson, ListofTickets);
+				else if (choice == 3)
+					id = showTickiets(ListofCities, ListofFlights, ListofPerson, ListofTickets);
+				else
+					throw exception("\n \t\t\terror option doesn't exist \n");
 			}
-			switch (choice) {
-			case 1:
-				bookFlight(ListofCities, ListofFlights, ListofPerson, ListofTickets, graph);
-				break;
-			case 2:
-				deleteTickiet(ListofCities, ListofFlights, ListofPerson, ListofTickets);
-				break;
-			case 3:
-				id = showTickiets(ListofCities, ListofFlights, ListofPerson, ListofTickets);
-				break;
-			default:
-				info = "\n \t\t\terror option doesn't exist \n";
-				break;
+			catch (exception & e) {
+				info = e.what();
 			}
+			
 		}
 		std::cout << "Thank you for your visit";
 		return 0;

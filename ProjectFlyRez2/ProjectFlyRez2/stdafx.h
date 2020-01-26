@@ -8,11 +8,17 @@
 #include <Windows.h>
 #include <algorithm>
 #include <vector> 
+#include <list>
+#include <set> 
+#include <iterator>
 
 using namespace std;
 
-#include "MyException.h"
 #include "Tmp.h"
-#include "Cities.h"
-#include "functions.h"
+#include "ClassOfTmp.h"
+#include "list.h"
+#include "fileOperation.h"
+#include "listOperations.h"
 #include "graph.h"
+#include "graphOperation.h"
+#include "functions.h"

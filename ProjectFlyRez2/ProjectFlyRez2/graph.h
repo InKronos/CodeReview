@@ -1,11 +1,18 @@
 #pragma once
 #include "stdafx.h"
 
-int** createGraph(List<Flight> list, int size);
+class Graph
+{
+	int nrOfVertices;
+public:
 
-int minDistance(int dist[], bool sptSet[], int size);
+	std::list<std::pair<int, int>>* listForGraph;
 
-vector<int> printPath(int parent[], int j, int source);
+	Graph(int _nrOfVertices);  // Constructor 
 
-int* dijkstra(int** graph, int src, int size);
+   // function to add an edge to graph 
+	void addEdge(int _sideOne, int _sideTwo, int weight);
 
+	// prints shortest path from s 
+	vector<int> shortestPath(int source, int destination);
+};
